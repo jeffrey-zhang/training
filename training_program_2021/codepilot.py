@@ -19,4 +19,4 @@ def read_ini(filename):
     # return the dictionary
     return data
 
-# define a compare function to
+

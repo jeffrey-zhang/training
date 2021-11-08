@@ -1,8 +1,4 @@
-import sys
-
-sys.path.append("..")
-
-from utils.class_utils import *
+from training_program_2021.utils.class_utils import Encoder, Decoder
 
 encoder = Encoder()
 decoder = Decoder()
