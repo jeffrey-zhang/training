@@ -12,6 +12,7 @@ print(gen_3)
 def get_sum(n):
     sum_1, sum_3 = 0,0
     for i in range(n):
+        print('the value of i is {}'.format(i))
         next_1 = next(gen_1)
         next_3 = next(gen_3)
         print('next_1 = {},next_3 = {}'.format(next_1,next_3))
