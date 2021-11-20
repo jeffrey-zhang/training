@@ -1,5 +1,5 @@
-from training_program_2021.utils.class_utils import Encoder, Decoder
-from training_program_2021.utils.utils import get_sum
+from utils.class_utils import Encoder, Decoder
+from utils.utils import get_sum
 
 print(get_sum(1, 2))
 
