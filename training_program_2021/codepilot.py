@@ -18,5 +18,3 @@ def read_ini(filename):
             data[words[0]] = words[1]
     # return the dictionary
     return data
-
-

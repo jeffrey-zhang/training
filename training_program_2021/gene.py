@@ -4,20 +4,23 @@ def generator(k):
         yield i ** k
         i += 1
 
+
 gen_1 = generator(1)
 gen_3 = generator(3)
 print(gen_1)
 print(gen_3)
 
+
 def get_sum(n):
-    sum_1, sum_3 = 0,0
+    sum_1, sum_3 = 0, 0
     for i in range(n):
         print('the value of i is {}'.format(i))
         next_1 = next(gen_1)
         next_3 = next(gen_3)
-        print('next_1 = {},next_3 = {}'.format(next_1,next_3))
+        print('next_1 = {},next_3 = {}'.format(next_1, next_3))
         sum_1 += next_1
         sum_3 += next_3
-    print(sum_1 * sum_1,sum_3)
+    print(sum_1 * sum_1, sum_3)
+
 
 get_sum(8)
