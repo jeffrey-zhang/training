@@ -4,7 +4,8 @@ import requests
 
 periods = '3600'
 
-resp = requests.get('https://api.cryptowat.ch/markets/gemini/btcusd/ohlc', params={'periods': periods})
+resp = requests.get(
+    'https://api.cryptowat.ch/markets/gemini/btcusd/ohlc', params={'periods': periods})
 data = resp.json()
 
 print(data)
