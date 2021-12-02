@@ -16,7 +16,7 @@ class SearchEngineBase(object):
 
 def main(search_engine):
     for file_path in ['1.txt', '2.txt', '3.txt', '4.txt', '5.txt']:
-        search_engine.add_corpus('training_program_2021/data/' + file_path)
+        search_engine.add_corpus('data/' + file_path)
 
     while True:
         query = input('please enter query word\n')
