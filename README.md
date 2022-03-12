@@ -1,5 +1,6 @@
-### learn & train sharing [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://sdz-gitpod.trendmicro.com/#https://github.com/jeffrey-zhang/training)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://sdz-gitpod.trendmicro.com/#https://github.com/jeffrey-zhang/training)
 
+### learn & train sharing 
 
 > Training Program @ 2020
   #### Git （08/07 ～ 09/06）
