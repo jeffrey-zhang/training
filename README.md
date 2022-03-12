@@ -1,6 +1,4 @@
-### learn & train sharing
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://sdz-gitpod.trendmicro.com/#https://github.com/jeffrey-zhang/training)
+### learn & train sharing [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://sdz-gitpod.trendmicro.com/#https://github.com/jeffrey-zhang/training)
 
 
 > Training Program @ 2020
