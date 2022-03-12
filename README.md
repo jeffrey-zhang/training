@@ -1,5 +1,8 @@
 ### learn & train sharing
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://sdz-gitpod.trendmicro.com/#https://github.com/jeffrey-zhang/training)
+
+
 > Training Program @ 2020
   #### Git （08/07 ～ 09/06）
     - Master basic git command
@@ -42,4 +45,3 @@
     * Python in action
     * python Log
     * Python work
-<a href="https://gitpod.myetslab.com/#https://github.com/jeffrey-zhang/training" rel="noopener noreferrer" target="_blank">![Open in SDZ-Gitpod](https://gitpod.io/button/open-in-gitpod.svg)</a>
