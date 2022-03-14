@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+  html lang "en-US"
+  head
+    title Posotions for {{asset}} title
+  head
+
+  body
+    h1 Posotions for {{asset}} h1
+
+    table
+      tr
+        th Time th
+        th Amount th
+      tr
+    {% for position in Posotions%}
+      tr
+        td {{position.timestamp}} td
+        td {{position.amount}} td
+      tr
+    {% endfor %}
+    table
+  body
