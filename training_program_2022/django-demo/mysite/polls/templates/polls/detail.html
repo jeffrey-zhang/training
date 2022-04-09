@@ -1,10 +1,10 @@
-<form action="{% url 'polls:vote' question.id%}" method="post">
+<form action="{% url 'polls:vote' questions.id%}" method="post">
   {% csrf_token %}
   <fieldset>
-    <legend><h1>{{ question.question_text }}</h1></legend>
+    <legend><h1>{{ questions.question_text }}</h1></legend>
     {% if error_message %}
     <p><strong>{{ error_message }}</strong></p>
-    {% endif %} {% for choice in question.choice_set.all %}
+    {% endif %} {% for choice in questions.choice_set.all %}
     <input
       type="radio"
       name="choice"
