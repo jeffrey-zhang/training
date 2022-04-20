@@ -1,5 +1,3 @@
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://sdz-gitpod.trendmicro.com/#https://github.com/jeffrey-zhang/training)
-
 ### learn & train sharing 
 
 > Training Program @ 2020
