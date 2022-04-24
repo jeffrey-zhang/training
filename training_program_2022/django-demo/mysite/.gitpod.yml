@@ -1,0 +1,15 @@
+# List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - init: echo 'init script' # runs during prebuild
+    command: echo 'start script'
+  - name: create virtual python env.
+    command: python3 -m venv .venv
+  - name: switch to virtual env.
+    command: source .venv/bin/activate
+  - name: install denpencient lib
+    command: pip install -r requirements.txt
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 3000
+    onOpen: open-preview
