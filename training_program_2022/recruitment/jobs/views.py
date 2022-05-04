@@ -7,14 +7,18 @@ from jobs.models import Cities, Job, JobTypes
 
 def joblist(request):
     job_list = Job.objects.order_by('job_type')
-    template = loader.get_template('joblist.html')
-    context = {'job_list': job_list}
+    
+    # <1> 函数方式render 页面
+    template = loader.get_template('joblist.html') # <1>joblist.html 获取到template中
+    context = {'job_list': job_list} # <1>在html中定义了block content
 
     for job in job_list:
         job.job_city = Cities[job.job_city][1]
         job.job_type = JobTypes[job.job_type][1]
 
-    return HttpResponse(template.render(context))
+    #return HttpResponse(template.render(context)) # <1> render函数将context中的内容渲染到template中
+
+    return render(request,'joblist.html',{'job_list':job_list}) # <2> 方法2 直接渲染页面
 
 def detail(request, job_id):
     try:
