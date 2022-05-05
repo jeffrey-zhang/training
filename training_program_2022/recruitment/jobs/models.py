@@ -30,3 +30,8 @@ class Job(models.Model):
         User, verbose_name="创建者", null=True, on_delete=models.SET_NULL)
     created_date = models.DateTimeField(verbose_name="创建日期", auto_now_add=True)
     modified_date = models.DateTimeField(verbose_name="修改日期", auto_now=True)
+    
+    class Meta:
+        verbose_name = "职位"
+        verbose_name_plural = "职位"
+        ordering = ['-created_date']
