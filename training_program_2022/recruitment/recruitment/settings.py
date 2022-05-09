@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from telnetlib import AUTHENTICATION
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_python3_ldap',
     'jobs',
     'interview',
 ]
@@ -124,3 +126,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LDAP_AUTH_URL = 'ldap://10.64.17.15:389'
+LDAP_AUTH_USE_TLS = False
+
+LDAP_AUTH_SEARCH_BASE = 'dc=ihopeit,dc=com'
+LDAP_AUTH_OBJECT_CLASS = 'inetOrgPerson'
+
+LDAP_AUTH_USER_FIELDS = {
+    'username': 'cn',
+    'first_name': 'givenName',
+    'last_name': 'sn',
+    'email': 'email',
+    
+}
+
+LDAP_AUTH_USER_LOOKUP_FIELDS = ('username')
+
+LDAP_AUTH_CLEAN_USER_DATA = 'django_python3_ldap.auth.clean_user_data'
+
+LDAP_AUTH_CONNECTION_USERNAME = 'jeffrey_zhang'
+LDAP_AUTH_CONNECTION_PASSWORD = 'trend_dev'
+
+AUTHENTICATION_BACKENDS = {'django_python3_ldap.auth.LDAPBackend','django.contrib.auth.backends.ModelBackend'}
+
