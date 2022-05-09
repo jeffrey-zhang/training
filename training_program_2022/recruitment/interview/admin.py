@@ -6,7 +6,8 @@ class CandidateAdmin(admin.ModelAdmin):
     exclude = ('creator','created_date','modified_date')
     
     list_display = (
-        "username","city","bachelor_school","first_score","first_result",'first_interviewer',
+        "username","city","bachelor_school","test_score_of_general_ability", "paper_score",
+        "first_score","first_result",'first_interviewer',
         'second_result','second_interviewer','hr_score','hr_result','last_editor'
     )
     
