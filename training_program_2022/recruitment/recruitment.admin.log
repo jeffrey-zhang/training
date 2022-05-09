@@ -1,0 +1,30 @@
+2022-05-09 16:18:56,350 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:20:18,988 django_python3_ldap.ldap 193 INFO     LDAP connect succeeded
+2022-05-09 16:20:18,988 django_python3_ldap.ldap 193 INFO     LDAP connect succeeded
+2022-05-09 16:20:18,995 django_python3_ldap.ldap 88 INFO     LDAP user lookup succeeded
+2022-05-09 16:20:18,995 django_python3_ldap.ldap 88 INFO     LDAP user lookup succeeded
+2022-05-09 16:20:30,047 interview.admin 41 INFO     %s exported %s records
+2022-05-09 16:20:54,035 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:20:54,708 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:20:55,882 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:20:56,313 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:21:01,518 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:21:01,980 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:21:16,288 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:21:16,747 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:21:21,974 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:21:22,454 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:21:28,866 interview.admin 41 INFO     jeffrey_zhang exported 3 records
+2022-05-09 16:22:17,414 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:22:18,166 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:22:19,362 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:22:19,827 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:22:23,042 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:22:23,547 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:22:28,777 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:22:29,280 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:22:39,305 interview.admin 41 INFO     jeffrey_zhang exported 4 records
+2022-05-09 16:23:10,031 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-09 16:23:10,677 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:23:13,991 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-09 16:23:14,523 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
