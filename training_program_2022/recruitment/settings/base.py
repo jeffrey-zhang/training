@@ -128,7 +128,25 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LDAP_AUTH_URL = 'ldap://10.64.17.15:389'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django_python3_ldap': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+### LDAP
+
+LDAP_AUTH_URL = 'ldap://127.0.0.1:389'
 LDAP_AUTH_USE_TLS = False
 
 LDAP_AUTH_SEARCH_BASE = 'dc=ihopeit,dc=com'
@@ -138,16 +156,16 @@ LDAP_AUTH_USER_FIELDS = {
     'username': 'cn',
     'first_name': 'givenName',
     'last_name': 'sn',
-    'email': 'email',
+    'email': 'mail',
     
 }
 
-LDAP_AUTH_USER_LOOKUP_FIELDS = ('username')
+LDAP_AUTH_USER_LOOKUP_FIELDS = ('username',)
 
-LDAP_AUTH_CLEAN_USER_DATA = 'django_python3_ldap.auth.clean_user_data'
+LDAP_AUTH_CLEAN_USER_DATA = 'django_python3_ldap.utils.clean_user_data'
 
-LDAP_AUTH_CONNECTION_USERNAME = 'jeffrey_zhang'
-LDAP_AUTH_CONNECTION_PASSWORD = 'trend_dev'
+LDAP_AUTH_CONNECTION_USERNAME = 'admin'
+LDAP_AUTH_CONNECTION_PASSWORD = 'admin_passwd_4_ldap'
 
 AUTHENTICATION_BACKENDS = {'django_python3_ldap.auth.LDAPBackend','django.contrib.auth.backends.ModelBackend'}
 
