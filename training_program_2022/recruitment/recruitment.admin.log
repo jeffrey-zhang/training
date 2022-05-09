@@ -28,3 +28,6 @@
 2022-05-09 16:23:10,677 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
 2022-05-09 16:23:13,991 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
 2022-05-09 16:23:14,523 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:24:33,914 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-09 16:32:24,750 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-09 16:36:08,134 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
