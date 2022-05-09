@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from curses.ascii import NUL
 import os
 from pathlib import Path
 from telnetlib import AUTHENTICATION
@@ -174,7 +175,7 @@ LOGGING = {
 
 # LDAP
 
-LDAP_AUTH_URL = 'ldap://127.0.0.1:389'
+LDAP_AUTH_URL = 'ldap://localhost:389'
 LDAP_AUTH_USE_TLS = False
 
 LDAP_AUTH_SEARCH_BASE = 'dc=ihopeit,dc=com'
@@ -192,8 +193,8 @@ LDAP_AUTH_USER_LOOKUP_FIELDS = ('username',)
 
 LDAP_AUTH_CLEAN_USER_DATA = 'django_python3_ldap.utils.clean_user_data'
 
-LDAP_AUTH_CONNECTION_USERNAME = 'admin'
-LDAP_AUTH_CONNECTION_PASSWORD = 'admin_passwd_4_ldap'
+LDAP_AUTH_CONNECTION_USERNAME = None
+LDAP_AUTH_CONNECTION_PASSWORD = None
 
 AUTHENTICATION_BACKENDS = {
     'django_python3_ldap.auth.LDAPBackend', 'django.contrib.auth.backends.ModelBackend'}
