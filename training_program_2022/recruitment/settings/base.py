@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 from telnetlib import AUTHENTICATION
 
@@ -131,20 +132,47 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {  # exact format is not important, this is the minimum information
+            'format': '%(asctime)s %(name)-12s %(lineno)d %(levelname)-8s %(message)s',
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-        }
-    },
-    'loggers': {
-        'django_python3_ldap': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
+            'formatter': 'simple',
         },
+
+        'mail_admins': {  # Add Handler for mail_admins for `warning` and above
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+        'file': {
+            # 'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter': 'simple',
+            # 'filename': os.path.join(os.path.dirname(BASE_DIR), 'recruitment.admin.log'),
+            'filename': os.path.join(BASE_DIR, 'recruitment.admin.log'),
+        },
+
+
+    },
+
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+
+    'loggers': {
+        "django_python3_ldap": {
+            "handlers": ["console", "file"],
+            "level": "DEBUG",
+        },
+
     },
 }
 
-### LDAP
+# LDAP
 
 LDAP_AUTH_URL = 'ldap://127.0.0.1:389'
 LDAP_AUTH_USE_TLS = False
@@ -157,7 +185,7 @@ LDAP_AUTH_USER_FIELDS = {
     'first_name': 'givenName',
     'last_name': 'sn',
     'email': 'mail',
-    
+
 }
 
 LDAP_AUTH_USER_LOOKUP_FIELDS = ('username',)
@@ -167,5 +195,5 @@ LDAP_AUTH_CLEAN_USER_DATA = 'django_python3_ldap.utils.clean_user_data'
 LDAP_AUTH_CONNECTION_USERNAME = 'admin'
 LDAP_AUTH_CONNECTION_PASSWORD = 'admin_passwd_4_ldap'
 
-AUTHENTICATION_BACKENDS = {'django_python3_ldap.auth.LDAPBackend','django.contrib.auth.backends.ModelBackend'}
-
+AUTHENTICATION_BACKENDS = {
+    'django_python3_ldap.auth.LDAPBackend', 'django.contrib.auth.backends.ModelBackend'}
