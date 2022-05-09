@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from interview.models import Candidate
 
 class CandidateAdmin(admin.ModelAdmin):
@@ -10,6 +9,19 @@ class CandidateAdmin(admin.ModelAdmin):
         "first_score","first_result",'first_interviewer',
         'second_result','second_interviewer','hr_score','hr_result','last_editor'
     )
+    
+    list_filter = (
+        'city','first_result','second_result','hr_result','first_interviewer','second_interviewer','hr_interviewer',
+    )
+    
+    search_fields = (
+        "username","phone",'email','bachelor_school',
+    )
+    
+    ordering = (
+        'hr_result','first_result','second_result',
+    )
+    
     
     fieldsets = (
         ('基本信息', {"fields": ("userid", ("username", "city", "phone"), ("email", "apply_position", "born_address"), ("gender", "candidate_remark"), ("bachelor_school", "master_school", "doctor_school"), ("major", "degree"), ("test_score_of_general_ability", "paper_score"),),}),
