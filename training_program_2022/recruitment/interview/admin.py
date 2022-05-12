@@ -1,4 +1,3 @@
-from asyncore import write
 from urllib import response
 from django.contrib import admin
 from django.http import HttpResponse
@@ -12,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 exportable_fields = (
     "username", "city", "bachelor_school", "test_score_of_general_ability", "paper_score",
-    "first_score", "first_result", 'first_interviewer',
-    'second_result', 'second_interviewer', 'hr_score', 'hr_result', 'last_editor')
+    "first_score", "first_result", 'first_interviewer_user',
+    'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'last_editor')
 
 
 def export_model_as_csv(modeladmin, request, queryset):
@@ -54,12 +53,12 @@ class CandidateAdmin(admin.ModelAdmin):
 
     list_display = (
         "username", "city", "bachelor_school", "test_score_of_general_ability", "paper_score",
-        "first_score", "first_result", 'first_interviewer',
-        'second_result', 'second_interviewer', 'hr_score', 'hr_result', 'last_editor'
+        "first_score", "first_result", 'first_interviewer_user',
+        'second_result', 'second_interviewer_user', 'hr_score', 'hr_result', 'last_editor'
     )
 
     list_filter = (
-        'city', 'first_result', 'second_result', 'hr_result', 'first_interviewer', 'second_interviewer', 'hr_interviewer',
+        'city', 'first_result', 'second_result', 'hr_result', 'first_interviewer_user', 'second_interviewer_user', 'hr_interviewer',
     )
 
     search_fields = (
@@ -69,16 +68,32 @@ class CandidateAdmin(admin.ModelAdmin):
     ordering = (
         'hr_result', 'first_result', 'second_result',
     )
+    
+    def get_group_names(self, user):
+        return [group.name for group in user.groups.all()]
+
+    ### readonly_fields = ('first_interviewer_user', 'second_interviewer_user', )
+    def get_readonly_fields(self, request, obj=None):
+        group_names = self.get_group_names(request.user)
+
+        if 'interview' in group_names:
+            logger.info('interviewer is in user group for %s' %
+                        request.user.username)
+            return ('first_interviewer_user', 'second_interviewer_user', )
+
+        return ()
+    
+    list_editable = ('first_interviewer_user', 'second_interviewer_user', )
 
     fieldsets = (
         ('基本信息', {"fields": ("userid", ("username", "city", "phone"), ("email", "apply_position", "born_address"), ("gender", "candidate_remark"),
          ("bachelor_school", "master_school", "doctor_school"), ("major", "degree"), ("test_score_of_general_ability", "paper_score"),), }),
         ('第一轮面试记录', {'fields': (("first_score", "first_learning_ability", "first_professional_competency"), "first_advantage",
-         "first_disadvantage", ("first_result", "first_recommend_position", "first_interviewer"), "first_remark",)}),
+         "first_disadvantage", ("first_result", "first_recommend_position"), "first_interviewer_user", "first_remark",)}),
         ('第二轮面试记录', {'fields': (("second_score", "second_learning_ability", "second_professional_competency"), ("second_pursue_of_excellence", "second_communication_ability",
-         "second_pressure_score"), "second_advantage", "second_disadvantage", ("second_result", "second_recommend_position", "second_interviewer"), "second_remark",)}),
+         "second_pressure_score"), "second_advantage", "second_disadvantage", ("second_result", "second_recommend_position"), "second_interviewer_user", "second_remark",)}),
         ('HR面试记录', {'fields': (("hr_score", "hr_responsibility", "hr_communication_ability"), ("hr_logic_ability",
-         "hr_potential", "hr_stability"), "hr_advantage", "hr_disadvantage", ("hr_result", "hr_interviewer"), "hr_remark",)}),
+         "hr_potential", "hr_stability"), "hr_advantage", "hr_disadvantage", "hr_result", "hr_interviewer", "hr_remark",)}),
     )
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # 第一轮面试结果
 FIRST_INTERVIEW_RESULT_TYPE = ((u'建议复试', u'建议复试'),(u'待定',u'待定'),(u'放弃',u'放弃'))
@@ -36,18 +37,18 @@ class Candidate(models.Model):
     paper_score = models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True, verbose_name=u'笔试分数')
     
     # 1st interview
-    first_score = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'初试分')
+    first_score = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'初试分', help_text='初试分1～5')
     first_learning_ability = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'学习能力得分')
     first_professional_competency = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'专业能力得分')
     first_advantage = models.TextField(max_length=1024, blank=True, verbose_name=u'优势')
     first_disadvantage = models.TextField(max_length=1024, blank=True, verbose_name=u'劣势')
     first_result = models.CharField(max_length=256, blank=True, choices=FIRST_INTERVIEW_RESULT_TYPE, verbose_name=u'结果')
     first_recommend_position = models.CharField(max_length=256, blank=True, verbose_name=u'推荐部门')
-    first_interviewer = models.CharField(max_length=256, blank=True, verbose_name=u'面试官')
+    first_interviewer_user = models.ForeignKey(User, related_name='first_interviewer_user', blank=True, null=True, on_delete= models.CASCADE, verbose_name=u'面试官')
     first_remark = models.TextField(max_length=1024, blank=True, verbose_name=u'备注')
     
     #2nd interview
-    second_score = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'专业复试得分')
+    second_score = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'专业复试得分',help_text='初试分1～5')
     second_learning_ability = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'学习能力得分')
     second_professional_competency = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'专业能力得分')
     second_pursue_of_excellence = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True, verbose_name=u'追求卓越得分')
@@ -57,7 +58,7 @@ class Candidate(models.Model):
     second_disadvantage = models.TextField(max_length=1024, blank=True, verbose_name=u'劣势')
     second_result = models.CharField(max_length=256, blank=True, choices=INTERVIEW_RESULT_TYPE, verbose_name=u'结果')
     second_recommend_position = models.CharField(max_length=256, blank=True, verbose_name=u'推荐部门')
-    second_interviewer = models.CharField(max_length=256, blank=True, verbose_name=u'面试官')
+    second_interviewer_user = models.ForeignKey(User, related_name='second_interviewer_user', blank=True, null=True, on_delete= models.CASCADE, verbose_name=u'面试官')
     second_remark = models.TextField(max_length=1024, blank=True, verbose_name=u'专业复试备注')
     
     # HR interview
@@ -71,6 +72,7 @@ class Candidate(models.Model):
     hr_disadvantage = models.TextField(max_length=1024, blank=True, verbose_name=u'劣势')
     hr_result = models.CharField(max_length=256, blank=True, choices=INTERVIEW_RESULT_TYPE, verbose_name=u'HR复试结果')
     hr_interviewer = models.CharField(max_length=256, blank=True, verbose_name=u'HR面试官')
+    hr_interviewer_user = models.ForeignKey(User, related_name='hr_interviewer_user', blank=True, null=True, on_delete= models.CASCADE, verbose_name=u'HR面试官')
     hr_remark = models.TextField(max_length=1024, blank=True, verbose_name=u'HR复试备注')
     
     # sys info
