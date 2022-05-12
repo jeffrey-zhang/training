@@ -620,3 +620,23 @@ django.core.exceptions.PermissionDenied
 2022-05-12 13:57:01,629 django_python3_ldap.ldap 193 INFO     LDAP connect succeeded
 2022-05-12 13:57:01,638 django_python3_ldap.ldap 88 INFO     LDAP user lookup succeeded
 2022-05-12 13:57:01,638 django_python3_ldap.ldap 88 INFO     LDAP user lookup succeeded
+2022-05-12 14:05:09,793 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:05:10,453 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:05:15,660 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:05:16,103 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:05:19,264 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:05:19,657 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:05:28,961 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:05:29,397 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:05:30,574 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:05:31,029 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:05:34,219 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:05:34,574 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:05:38,769 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:05:39,180 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:06:06,780 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/recruitment/urls.py changed, reloading.
+2022-05-12 14:06:07,201 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:06:11,395 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/recruitment/urls.py changed, reloading.
+2022-05-12 14:06:11,857 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:06:14,011 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/recruitment/urls.py changed, reloading.
+2022-05-12 14:06:14,465 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
