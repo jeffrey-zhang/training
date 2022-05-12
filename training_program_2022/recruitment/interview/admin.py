@@ -1,6 +1,6 @@
 from urllib import response
 from django.contrib import admin
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from interview.models import Candidate
 
 import logging
@@ -83,7 +83,20 @@ class CandidateAdmin(admin.ModelAdmin):
 
         return ()
     
-    list_editable = ('first_interviewer_user', 'second_interviewer_user', )
+    ### list_editable = ('first_interviewer_user', 'second_interviewer_user', )
+    default_list_editable = ('first_interviewer_user', 'second_interviewer_user', )
+    
+    def get_list_editable(self, request):
+        group_names = self.get_group_names(request.user)
+        
+        if request.user.is_superuser or 'HR' in group_names:
+            return self.default_list_editable
+        
+        return ()
+    
+    def get_changelist_instance(self, request):
+        self.list_editable = self.get_list_editable(request)
+        return super(CandidateAdmin,self).get_changelist_instance(request)
 
     fieldsets = (
         ('基本信息', {"fields": ("userid", ("username", "city", "phone"), ("email", "apply_position", "born_address"), ("gender", "candidate_remark"),
