@@ -640,3 +640,15 @@ django.core.exceptions.PermissionDenied
 2022-05-12 14:06:11,857 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
 2022-05-12 14:06:14,011 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/recruitment/urls.py changed, reloading.
 2022-05-12 14:06:14,465 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:27:26,466 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:27:27,193 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:27:28,366 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:27:28,798 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:28:03,557 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:28:04,138 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:28:06,338 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/settings/base.py changed, reloading.
+2022-05-12 14:28:06,780 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:28:17,088 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-12 14:28:17,567 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
+2022-05-12 14:28:44,180 django.utils.autoreload 266 INFO     /Users/jeffreyzhang/Workspace/training/training_program_2022/recruitment/interview/admin.py changed, reloading.
+2022-05-12 14:28:44,719 django.utils.autoreload 677 INFO     Watching for file changes with StatReloader
