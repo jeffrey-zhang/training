@@ -1,31 +1,35 @@
-from urllib import response
-from flask import Flask, make_response, redirect, render_template, request
+from crypt import methods
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "hard to guss string"
 
-@app.route('/')
+bootstrap = Bootstrap(app)
+moment = Moment(app)
+
+
+class NameForm(FlaskForm):
+    name = StringField("What is your name?", validators=[DataRequired()])
+    submit = SubmitField('Submit')
+    
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
+
+@app.route('/', methods=['GET','POST'])
 def index():
-    user_agent = request.headers.get('User-Agent')
-    return '<h1>Hello World!</h1> \n <p>Your browser is {}</p>'.format(user_agent)
-
-@app.route('/user/<name>')
-def user(name):
-    return render_template('user.html', name=name)
-
-@app.route('/400')
-def error_400():
-    return '<h1>Error: %s</h1>' % 400
-
-@app.route('/set-cookie')
-def go_set_cookie():
-    response = make_response('<h1> This document carries a cookie. </h1>')
-    response.set_cookie('answer', '42')
-    return response
-
-@app.route('/redirect')
-def go_redirect():
-    return redirect('http://www.baidu.com')
-
-@app.route('/index')
-def home():
-    return render_template('index.html')
+    name = None
+    form = NameForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ''
+    return render_template('index.html',form=form, name=name)
