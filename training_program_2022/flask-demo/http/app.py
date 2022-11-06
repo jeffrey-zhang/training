@@ -76,3 +76,10 @@ def admin_mgt():
         abort(403)
 
     return "welcome to admin page"
+
+
+@app.route("/logout")
+def logout_user():
+    if "logged_in" in session:
+        session.pop("logged_in")
+    return redirect(url_for("hello_man"))
