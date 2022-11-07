@@ -50,12 +50,12 @@ def hi_man():
     return redirect(url_for("hello_man"))
 
 
-@app.route("/foo")
-def foo_json():
-    data = {"name": "Jeffrey", "gender": "male"}
-    response = make_response(json.dumps(data))
-    response.mimetype = "application/json"
-    return response
+# @app.route("/foo")
+# def foo_json():
+#     data = {"name": "Jeffrey", "gender": "male"}
+#     response = make_response(json.dumps(data))
+#     response.mimetype = "application/json"
+#     return response
 
 
 @app.route("/foojson")
@@ -82,4 +82,19 @@ def admin_mgt():
 def logout_user():
     if "logged_in" in session:
         session.pop("logged_in")
+    return redirect(url_for("hello_man"))
+
+
+@app.route("/foo")
+def foo():
+    return '<h1>Foo page</h1><a href="%s">Do Something </a>' % url_for("do_something")
+
+
+@app.route("/bar")
+def bar():
+    return '<h1>Bar page</h1><a href="%s">Do Something </a>' % url_for("do_something")
+
+
+@app.route("/dosomething")
+def do_something():
     return redirect(url_for("hello_man"))
