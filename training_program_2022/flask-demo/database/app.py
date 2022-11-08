@@ -13,6 +13,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
 
 db = SQLAlchemy(app)
 # import the db models
-from model import note, author, article
+from models import note, author, article
 
 migrate = Migrate(app, db)
