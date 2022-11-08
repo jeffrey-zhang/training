@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate, migrate
 import os
 
 app = Flask(__name__)
@@ -12,4 +12,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
 )
 
 db = SQLAlchemy(app)
+# import the db models
+from model import note, author, article
 
+migrate = Migrate(app, db)
