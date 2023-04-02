@@ -28,6 +28,3 @@ func forCase() {
 		fmt.Println("forL i=", i)
 	}
 }
-
-// implement a function to integrated with MS AAD
-
