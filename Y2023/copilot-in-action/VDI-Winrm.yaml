@@ -1,0 +1,94 @@
+---
+- hosts: windows
+  vars_files:
+    - /etc/ansible/tokendata.yaml
+  vars_prompt:
+    - name: profileAccountName
+    - name: profileShareFileName
+    - name: fslogixSizeInMBs
+  tasks:
+    - name: var info
+      win_shell: echo profileAccountName is {{ profileAccountName }},profileShareFileName is {{ profileShareFileName }}
+    - name: Install Remote Desktop Session Host (RDSH) role # Windows Server 2019 only
+      win_shell: Add-WindowsFeature rds-rd-server
+    - name: Hide notifications about Remote Desktop Server licensing # Windows Server 2019 only
+      win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
+        name: "{{ item.name }}"
+        data: "{{ item.data }}"
+        type: "{{ item.type }}"
+      with_items:
+        - { name: "fDisableTerminalServerTooltip", data: "1", type: "dword" }
+    - name: Don't display Server Manager at logon # Windows Server 2019 only
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\ServerManager
+        name: "{{ item.name }}"
+        data: "{{ item.data }}"
+        type: "{{ item.type }}"
+      with_items:
+        - { name: "DoNotOpenServerManagerAtLogon", data: "1", type: "dword" }
+    - name: install RDAgent packages
+      win_package:
+        path: C:\ProgramData\Microsoft.RDInfra.RDAgent.Installer-x64.msi
+        state: present
+      register: msi_rdagent_install
+      retries: 10
+      delay: 20
+      until: msi_rdagent_install.rc != 1618
+    - name: install bootloader packages
+      win_package:
+        path: C:\ProgramData\Microsoft.RDInfra.RDAgentBootLoader.Installer-x64.msi
+        state: present
+      register: msi_rdagentbl_install
+      retries: 10
+      delay: 20
+      until: msi_rdagentbl_install.rc != 1618
+      notify: reboot
+    - name: install FSlogix packages1
+      win_package:
+        path: C:\ProgramData\FSLogixAppsSetup.exe
+        product_id: "{57FDE908-E52E-4B8C-9B12-1FD6F7DB953A}"
+        state: present
+        arguments:
+          - /install
+          - /norestart
+          - /quiet
+    - name: modify regedit FSlogix
+      win_regedit:
+        path: HKLM:\SOFTWARE\FSLogix\Profiles
+        name: "{{ item.name }}"
+        data: "{{ item.data }}"
+        type: "{{ item.type }}"
+      with_items:
+        - { name: "Enabled", data: "1", type: "dword" }
+        - {
+            name: "DeleteLocalProfileWhenVHDShouldApply",
+            data: "1",
+            type: "dword",
+          }
+        - { name: "FoldersToRemove", data: "", type: "multistring" }
+        - {
+            name: "VHDLocations",
+            data: '\\{{ profileAccountName }}.file.core.usgovcloudapi.net\{{ profileShareFileName }}',
+            type: "multistring",
+          }
+        - { name: "SizeInMBs", data: "{{ fslogixSizeInMBs }}", type: "dword" }
+        - { name: "ShutdownOnUserLogoff", data: "1", type: "dword" }
+    - name: modify regedit FSlogix apps
+      win_regedit:
+        path: HKLM:\SOFTWARE\FSLogix\Apps
+        name: "{{ item.name }}"
+        data: "{{ item.data }}"
+        type: "{{ item.type }}"
+      with_items:
+        - { name: "CleanupInvalidSessions", data: "1", type: "dword" }
+    - name: registration token join to hostpool
+      win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\RDInfraAgent
+        name: RegistrationToken
+        data: "{{ tokendata }}"
+        type: string
+
+  handlers:
+    - name: reboot
+      win_reboot:
