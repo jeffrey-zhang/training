@@ -1,6 +1,8 @@
 """main functionality for the FastAPI tutorial."""
 from enum import Enum
-from fastapi import FastAPI
+from typing import Union
+from fastapi import FastAPI, Query
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -13,18 +15,18 @@ async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/items/{item_id}")
-async def read_item(item_id: int):
-    """
-    Retrieve an item with the given ID.
+# @app.get("/items/{item_id}")
+# async def read_item(item_id: int):
+#     """
+#     Retrieve an item with the given ID.
 
-    Args:
-        item_id (int): The ID of the item to retrieve.
+#     Args:
+#         item_id (int): The ID of the item to retrieve.
 
-    Returns:
-        dict: A dictionary containing the ID of the retrieved item.
-    """
-    return {"item_id": item_id}
+#     Returns:
+#         dict: A dictionary containing the ID of the retrieved item.
+#     """
+#     return {"item_id": item_id}
 
 
 @app.get("/users/me")
@@ -99,20 +101,68 @@ async def read_file(file_path: str):
     """
     return {"file_path": file_path}
 
-fake_items_db = [{"item_name": "Foo"}, {
-    "item_name": "Bar"}, {"item_name": "Baz"}]
+# fake_items_db = [{"item_name": "Foo"}, {
+#     "item_name": "Bar"}, {"item_name": "Baz"}]
+
+
+# @app.get("/items/")
+# async def read_items(skip: int = 0, limit: int = 10):
+#     """
+#     Retrieve items from the fake database.
+
+#     Args:
+#         skip (int): The number of items to skip.
+#         limit (int): The maximum number of items to retrieve.
+
+#     Returns:
+#         List[Dict]: A list of items retrieved from the database.
+#     """
+#     return fake_items_db[skip: skip + limit]
+
+
+class Item(BaseModel):
+    """
+    Represents an item that can be sold in the store.
+
+    Attributes:
+        name (str): The name of the item.
+        description (str, optional): A description of the item.
+        price (float): The price of the item.
+        tax (float, optional): The tax rate for the item.
+    """
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+@app.post("/items/")
+async def create_item(item: Item):
+    """
+    Creates an item in the fake database.
+
+    Args:
+        item (Item): The item to be created.
+
+    Returns:
+        dict: A dictionary containing the item's name, description, price, and tax.
+    """
+
+    return item
 
 
 @app.get("/items/")
-async def read_items(skip: int = 0, limit: int = 10):
+async def read_items(q: Union[str, None] = Query(None, max_length=50)):
     """
     Retrieve items from the fake database.
 
     Args:
-        skip (int): The number of items to skip.
-        limit (int): The maximum number of items to retrieve.
+        q (str, optional): The query string to search for.
 
     Returns:
-        List[Dict]: A list of items retrieved from the database.
+        dict: A dictionary containing the query string.
     """
-    return fake_items_db[skip: skip + limit]
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
