@@ -1,8 +1,10 @@
 """main functionality for the FastAPI tutorial."""
+from datetime import datetime, time, timedelta
 from enum import Enum
-from typing import Union
-from fastapi import FastAPI, Query
-from pydantic import BaseModel
+from typing import Annotated, Union
+from uuid import UUID
+from fastapi import Body, FastAPI, Header, Query
+from pydantic import BaseModel, EmailStr, SecretStr
 
 app = FastAPI()
 
@@ -166,3 +168,130 @@ async def read_items(q: Union[str, None] = Query(None, max_length=50)):
     if q:
         results.update({"q": q})
     return results
+
+
+@app.put("/items/{item_id}")
+async def read_item(item_id: UUID,
+                    start_datetime: Annotated[datetime | None, Body()] = None,
+                    end_datetime: Annotated[datetime | None, Body()] = None,
+                    repeat_at: Annotated[time | None, Body()] = None,
+                    process_after: Annotated[timedelta | None, Body()] = None):
+    """
+    Retrieve information about an item, including its ID, start and end datetimes, repeat time, and processing delay.
+
+    :param item_id: The ID of the item to retrieve information for.
+    :type item_id: UUID
+    :param start_datetime: The datetime the item starts, defaults to None.
+    :type start_datetime: Annotated[datetime | None, Body()], optional
+    :param end_datetime: The datetime the item ends, defaults to None.
+    :type end_datetime: Annotated[datetime | None, Body()], optional
+    :param repeat_at: The time the item repeats, defaults to None.
+    :type repeat_at: Annotated[time | None, Body()], optional
+    :param process_after: The delay before processing the item, defaults to None.
+    :type process_after: Annotated[timedelta | None, Body()], optional
+    :return: A dictionary containing information about the item.
+    :rtype: dict
+    """
+    start_process = start_datetime + process_after
+    duration = end_datetime - start_datetime
+    return {
+        "item_id": item_id,
+        "start_datetime": start_datetime,
+        "end_datetime": end_datetime,
+        "repeat_at": repeat_at,
+        "process_after": process_after,
+        "start_process": start_process,
+        "duration": duration
+    }
+
+
+@app.get("/user-agent")
+async def get_user_agent(user_agent: Annotated[str | None, Header()] = None):
+    """
+    Returns the user agent.
+
+    Args:
+        user_agent (str, optional): The user agent string.
+
+    Returns:
+        dict: A dictionary containing the user agent string.
+    """
+    return {"User-Agent": user_agent}
+
+
+class Item2(BaseModel):
+    """
+    Represents an item with a name, description, price, tax, and tags.
+
+    Attributes:
+        name (str): The name of the item.
+        description (str, optional): The description of the item.
+        price (float): The price of the item.
+        tax (float, optional): The tax rate for the item.
+        tags (list[str], optional): A list of tags associated with the item.
+    """
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+    tags: list[str] = []
+
+
+@app.post("/items2/", response_model=Item2)
+async def create_item2(item: Item2) -> any:
+    """
+    Creates a new item in the database.
+
+    Args:
+        item (Item2): The item to create.
+
+    Returns:
+        any: The created item.
+    """
+    return item
+
+
+@app.get("/item2/", response_model=list[Item2])
+async def read_items2() -> None:
+    """
+    Reads a list of items from a data source and returns it as a list of dictionaries.
+
+    Returns:
+        A list of dictionaries, where each dictionary represents an item and has the following keys:
+        - name: a string representing the name of the item
+        - price: a float representing the price of the item
+    """
+    return [
+        {"name": "Portal Gun", "price": 42.0},
+        {"name": "Plumbus", "price": 32.0}
+    ]
+
+
+class UserIn(BaseModel):
+    """
+    Represents a user input object.
+
+    Attributes:
+        username (str): The user's username.
+        password (str): The user's password.
+        email (EmailStr): The user's email address.
+        full_name (str, optional): The user's full name (if provided).
+    """
+    username: str
+    password: SecretStr
+    email: EmailStr
+    full_name: str | None = None
+
+
+@app.post("/user")
+async def create_user(user: UserIn) -> UserIn:
+    """
+    Creates a new user in the system.
+
+    Args:
+        user (UserIn): The user to create.
+
+    Returns:
+        UserIn: The created user.
+    """
+    return user
