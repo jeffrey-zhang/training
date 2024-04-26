@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: busy
+  name: env-pod
+spec:
+  containers:
+    - env:
+        - name: COUNT
+          valueFrom:
+            configMapKeyRef:
+              name: info
+              key: count
+        - name: GREETING
+          valueFrom:
+            configMapKeyRef:
+              name: info
+              key: greeting
+        - name: DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: info
+              key: debug
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: user
+              key: name
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: user
+              key: pwd
+      image: busybox
+      name: busy
+      imagePullPolicy: IfNotPresent
+      command: ["/bin/sleep", "3600"]
+      resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
