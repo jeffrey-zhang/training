@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/jeffrey-zhang/training-program/compare/v1.0.0...v1.1.0) (2024-04-26)
+
+
+### Features
+
+* add configMap, secret and volumns demo ([1d8e1d2](https://github.com/jeffrey-zhang/training-program/commit/1d8e1d22b558d89b5349869a41fca6fcb13a3f95))
+
 ## 1.0.0 (2024-04-25)
 
 
